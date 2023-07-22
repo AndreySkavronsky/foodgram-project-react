@@ -15,28 +15,30 @@
 
 
 Реализованы базовые команды при запуске проекта:
-`docker-compose exec backend python manage.py collectstatic --noinput`
-`docker-compose exec backend python manage.py makemigrations`
-`docker-compose exec backend python manage.py migrate`
-`docker-compose exec backend python manage.py import_csv`
+```docker-compose exec backend python manage.py collectstatic --noinput```
+```docker-compose exec backend python manage.py makemigrations```
+```docker-compose exec backend python manage.py migrate```
+```docker-compose exec backend python manage.py import_csv```
 
 (docker-compose exec backend - варианты выполнения через терминал).
 
 Создание суперюзера:
-`docker-compose exec backend python manage.py createsuperuser`
+```docker-compose exec backend python manage.py createsuperuser```
 
 Остановка тестового проекта и удаление контейнеров:
-`docker compose down -v`
+```docker compose down -v```
 
 Проверка запуска контейнеров:
-`docker ps`
-`docker ps -a`
+```docker ps```
+```docker ps -a```
 
 Образы контейнеров:
-`docker images`
+```docker images```
 
 Удаление ненужных образов:
-`docker rmi <ID container>`
+```docker rmi <ID container>```
+
+Примеры API
 
 ```
 Recipe List
