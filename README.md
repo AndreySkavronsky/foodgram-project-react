@@ -15,10 +15,12 @@
 
 
 Реализованы базовые команды при запуске проекта:
-```docker-compose exec backend python manage.py collectstatic --noinput
+```
+docker-compose exec backend python manage.py collectstatic --noinput
 docker-compose exec backend python manage.py makemigrations
 docker-compose exec backend python manage.py migrate
-docker-compose exec backend python manage.py import_csv```
+docker-compose exec backend python manage.py import_csv
+```
 
 (docker-compose exec backend - варианты выполнения через терминал).
 
@@ -146,6 +148,7 @@ Vary: Accept
     ]
 }
 ```
+API/USERS/
 
 ```
 User List
