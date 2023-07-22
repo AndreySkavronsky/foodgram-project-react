@@ -12,7 +12,6 @@ class Command(BaseCommand):
     help = 'Create demo data'
 
     def handle(self, *args, **options):
-        # Создание тегов
         Tag.create_default_tags()
 
         def create_objects_from_csv(file_path, create_func):
