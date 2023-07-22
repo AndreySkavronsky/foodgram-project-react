@@ -46,6 +46,20 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def create_default_tags(cls):
+        tags_data = [
+            {'name': 'Завтрак', 'color': '#FF69B4', 'slug': 'breakfast'},
+            {'name': 'Обед', 'color': '#00CED1', 'slug': 'lunch'},
+            {'name': 'Ужин', 'color': '#FFA07A', 'slug': 'dinner'},
+            {'name': 'Перекус', 'color': '#9ACD32', 'slug': 'snack'},
+        ]
+        for tag_data in tags_data:
+            cls.objects.update_or_create(
+                name=tag_data['name'],
+                defaults={'color': tag_data['color'], 'slug': tag_data['slug']}
+            )
+
 
 class Recipe(models.Model):
     name = models.CharField(
@@ -73,6 +87,13 @@ class Recipe(models.Model):
     )
     pub_date = models.DateTimeField(
         'Дата публикации', auto_now_add=True
+    )
+
+    favorite = models.ManyToManyField(
+        User,
+        through='Favorite',
+        related_name='favorite_recipes',
+        verbose_name='Избранные рецепты'
     )
 
     class Meta:

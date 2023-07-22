@@ -1,21 +1,24 @@
+# Используем образ Python в качестве базового
 FROM python:3.11.4-slim
 
+# Обновляем и устанавливаем зависимости, включая утилиту make
 RUN apt-get update &&\
     apt-get upgrade -y &&\
+    apt-get install -y --no-install-recommends make &&\
     apt-get clean &&\
     apt-get autoremove -y &&\
     rm -rf /var/lib/apt/lists/*
 
+# Устанавливаем рабочую директорию
 WORKDIR /app
+
+# Копируем requirements.txt и устанавливаем зависимости
 COPY requirements.txt ./
 RUN pip install -U pip &&\
     pip install --no-cache-dir -r requirements.txt
 
-# Download wait-for-it.sh and make it executable
-ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
-
+# Копируем все остальные файлы проекта
 COPY . /app
-RUN chmod +x start_script.sh
 
-CMD ["/app/start_script.sh"]
+# Выполняем все необходимые действия и запускаем Gunicorn через Makefile
+CMD ["make", "run"]
