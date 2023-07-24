@@ -1,5 +1,6 @@
 from django.core.validators import RegexValidator
 from django.db import models
+
 from users.models import User
 
 
@@ -66,7 +67,7 @@ class Recipe(models.Model):
         'Название рецепта', max_length=200
     )
     image = models.ImageField(
-        'Изображение', upload_to='recipes/', blank=True
+        'Изображение', upload_to='recipes/'
     )
     text = models.TextField(
         'Описание рецепта'

@@ -6,4 +6,8 @@ class ListRetrieveViewSet(
     mixins.RetrieveModelMixin,
     viewsets.GenericViewSet
 ):
-    pass
+    """
+    Пользовательский ViewSet - объединяет ListModelMixin и RetrieveModelMixin,
+    для поддержки вывода списка нескольких объектов модели и получения
+    информации об одном отдельном объекте модели.
+    """

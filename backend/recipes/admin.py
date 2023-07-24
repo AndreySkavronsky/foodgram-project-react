@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from . import models
-from .models import Recipe
 
 
 @admin.register(models.Ingredient)
@@ -23,7 +22,7 @@ class IngredientsInline(admin.TabularInline):
     extra = 1
 
 
-@admin.register(Recipe)
+@admin.register(models.Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ('name', 'author', 'text', 'added_to_favorite')
     list_filter = ('author', 'name', 'tags')

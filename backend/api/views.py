@@ -1,15 +1,22 @@
 from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+
 from django_filters.rest_framework import DjangoFilterBackend
-from recipes.models import Favorite, Ingredient, Recipe, Tag
-from recipes.models import RecipeIngredient, ShoppingCart
 from rest_framework import filters, mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from users.models import Subscribe, User
 
+from recipes.models import (
+    Favorite,
+    Ingredient,
+    Recipe,
+    Tag,
+    RecipeIngredient,
+    ShoppingCart,
+)
+from users.models import Subscribe, User
 from .filters import RecipeFilter
 from .mixins import ListRetrieveViewSet
 from .pagination import CustomPaginator
@@ -177,11 +184,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 'ingredient__measurement_unit')
         )
 
-        wishlist = []
-        for item in ingredients:
-            wishlist.append(
-                f'{item[0]} - {item[2]} {item[1]}'
-            )
+        wishlist = [
+            f'{item[0]} - {item[1]} {item[2]}'
+            for item in ingredients
+        ]
 
         wishlist = '\n'.join(wishlist)
         response = HttpResponse(wishlist, 'Content-Type: text/plain')

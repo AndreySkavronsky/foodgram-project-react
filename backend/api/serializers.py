@@ -2,6 +2,8 @@ from api.fields import Base64ImageField
 from django.contrib.auth.password_validation import validate_password
 from django.db import transaction
 from djoser.serializers import UserCreateSerializer, UserSerializer
+from rest_framework import serializers
+
 from recipes.models import (
     Favorite,
     Ingredient,
@@ -10,7 +12,6 @@ from recipes.models import (
     ShoppingCart,
     Tag,
 )
-from rest_framework import serializers
 from users.models import Subscribe, User
 
 
@@ -250,13 +251,6 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             'cooking_time',
             'author'
         )
-        extra_kwargs = {
-            'ingredients': {'required': True, 'allow_blank': False},
-            'tags': {'required': True, 'allow_blank': False},
-            'name': {'required': True, 'allow_blank': False},
-            'text': {'required': True, 'allow_blank': False},
-            'image': {'required': True, 'allow_blank': False},
-        }
 
     def validate(self, attrs):
         if 'cooking_time' not in attrs or attrs['cooking_time'] is None:
