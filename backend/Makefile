@@ -3,4 +3,4 @@ run:
 	python manage.py makemigrations
 	python manage.py migrate
 	python manage.py csv_import
-	gunicorn --bind 0.0.0.0:8000 foodgram.wsgi:application
+	gunicorn --bind 0.0.0.0:$${FOODGRAM_PORT} foodgram.wsgi:application

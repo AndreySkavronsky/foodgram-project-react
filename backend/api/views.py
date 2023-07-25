@@ -17,11 +17,11 @@ from recipes.models import (
     ShoppingCart,
 )
 from users.models import Subscribe, User
-from .filters import RecipeFilter
-from .mixins import ListRetrieveViewSet
-from .pagination import CustomPaginator
-from .permissions import IsAuthorOrAdminOrReadOnly
-from .serializers import (
+from api.filters import RecipeFilter
+from api.mixins import ListRetrieveViewSet
+from api.pagination import CustomPaginator
+from api.permissions import IsAuthorOrAdminOrReadOnly
+from api.serializers import (
     IngredientSerializer,
     RecipeCreateSerializer,
     RecipeReadSerializer,

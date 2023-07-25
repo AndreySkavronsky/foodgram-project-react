@@ -1,9 +1,9 @@
-from api.fields import Base64ImageField
 from django.contrib.auth.password_validation import validate_password
 from django.db import transaction
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 
+from api.fields import Base64ImageField
 from recipes.models import (
     Favorite,
     Ingredient,

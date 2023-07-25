@@ -1,16 +1,23 @@
 from django.contrib import admin
 
-from . import models
+from recipes.models import (
+    Ingredient,
+    Tag,
+    Recipe,
+    RecipeIngredient,
+    Favorite,
+    ShoppingCart
+)
 
 
-@admin.register(models.Ingredient)
+@admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
     list_display = ('name', 'measurement_unit')
     list_filter = ('name',)
     search_fields = ('name',)
 
 
-@admin.register(models.Tag)
+@admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'color', 'slug')
     list_filter = ('name', 'color')
@@ -18,11 +25,11 @@ class TagAdmin(admin.ModelAdmin):
 
 
 class IngredientsInline(admin.TabularInline):
-    model = models.RecipeIngredient
+    model = RecipeIngredient
     extra = 1
 
 
-@admin.register(models.Recipe)
+@admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ('name', 'author', 'text', 'added_to_favorite')
     list_filter = ('author', 'name', 'tags')
@@ -33,7 +40,7 @@ class RecipeAdmin(admin.ModelAdmin):
         return obj.favorite.count()
 
 
-@admin.register(models.RecipeIngredient)
+@admin.register(RecipeIngredient)
 class RecipeIngredientAdmin(admin.ModelAdmin):
     list_display = ('pk', 'recipe', 'ingredient', 'amount')
     list_filter = ('recipe', 'ingredient')
@@ -44,14 +51,14 @@ class RecipeIngredientAdmin(admin.ModelAdmin):
         return obj.favorite.count()
 
 
-@admin.register(models.Favorite)
+@admin.register(Favorite)
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'recipe')
     list_filter = ('user', 'recipe')
     search_fields = ('user', 'recipe')
 
 
-@admin.register(models.ShoppingCart)
+@admin.register(ShoppingCart)
 class ShoppingCartAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'recipe')
     list_filter = ('user', 'recipe')
